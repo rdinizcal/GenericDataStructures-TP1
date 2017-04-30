@@ -1,14 +1,5 @@
 package br.unb.cic.tp1.ds.linear
 
-class Node[T] (value : T, next : Node[T] = null) {
-  val _value : T = value;
-  var _next : Node[T] = next;
-  
-  override def toString: String = {
-    return "%d".format(_value);
-  }
-}
-
 class LinkedList[T] extends List[T]{
   
   var _size : Int = 0;
@@ -41,7 +32,7 @@ class LinkedList[T] extends List[T]{
 
   
   override def elementAt(pos : Int) : T = {
-    require(pos >= 0 && pos < _size)
+    require(pos >= 0 && pos < _size+1)
     var it = _head._next;
     for(i <- 0 until pos) {it = it._next}
     return it._value;
