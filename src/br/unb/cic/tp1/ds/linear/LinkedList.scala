@@ -3,24 +3,29 @@ package br.unb.cic.tp1.ds.linear
 class Node[T] (value : T, next : Node[T] = null) {
   val _value : T = value;
   var _next : Node[T] = next;
+  
+  override def toString: String = {
+    return "%d".format(_value);
+  }
 }
 
 class LinkedList[T] extends List[T]{
   
   var _size : Int = 0;
-  val _head : Node[T] = null;
+  var _head : Node[T] = null;
   
   override def size() : Int = {
     return _size;
   }
   
   override def insert(v : T, pos : Int) : Unit = {
-    require(pos >= 0 && pos < _size);
+    require(pos >= 0 && pos < _size+1);
     
-    val newNode = new Node[T](v,null);
+    val newNode = new Node[T](v);
     var prevNode : Node[T] = null;
     
     if(pos == 0){
+      if(_head == null) _head = new Node[T](v);
       newNode._next = _head._next;
       _head._next = newNode;
     }else{
@@ -37,7 +42,7 @@ class LinkedList[T] extends List[T]{
   
   override def elementAt(pos : Int) : T = {
     require(pos >= 0 && pos < _size)
-    var it = _head;
+    var it = _head._next;
     for(i <- 0 until pos) {it = it._next}
     return it._value;
   }
